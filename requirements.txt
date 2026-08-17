@@ -1,0 +1,12 @@
+pydantic>=2.5
+PyYAML>=6.0
+Jinja2>=3.1
+WeasyPrint>=60.0
+typer>=0.9
+
+# Optional backends
+# openai>=1.0    # for --provider openai
+# Ollama needs no package; it is called over HTTP.
+
+# Dev
+pytest>=7.4
