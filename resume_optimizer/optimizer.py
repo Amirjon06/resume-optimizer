@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import re
+
 from typing import Callable, List, Optional
 
 from .llm import LLMError, LLMProvider, coerce_bullets, get_provider
@@ -9,6 +11,35 @@ from .llm import prompts
 from .models import Resume, SkillGroup
 
 ProgressHook = Optional[Callable[[str], None]]
+
+BENEFIT_CLAUSE = re.compile(
+    r",?\s+(?:to\s+)?(?:improving|enhancing|ensuring|enabling|streamlining|"
+    r"fostering|boosting|driving|increasing|improve|enhance|ensure|enable)\b[^.]*",
+    re.IGNORECASE,
+)
+
+
+def strip_unsupported_clause(bullet: str, notes: List[str]) -> str:
+    """Drop a trailing benefit clause that the source notes do not support.
+
+    The model reliably appends outcome clauses even when told not to, because
+    resume prose is full of them. Prompt rules only reduce the rate, so the
+    check is enforced here instead.
+    """
+    match = BENEFIT_CLAUSE.search(bullet)
+    if not match:
+        return bullet
+
+    clause_words = set(re.findall(r"[a-z]{4,}", match.group(0).lower()))
+    source = " ".join(notes).lower()
+    supported = {word for word in clause_words if word in source}
+
+    # The clause's own verb never appears in the notes, so allow one miss.
+    if len(clause_words) > 1 and len(supported) >= len(clause_words) - 1:
+        return bullet
+
+    cleaned = bullet[: match.start()].rstrip(" ,;")
+    return cleaned if cleaned.endswith(".") else cleaned + "."
 
 
 class ResumeOptimizer:
@@ -80,7 +111,8 @@ class ResumeOptimizer:
             self._log(f"  falling back to raw notes ({exc})")
             return notes[:limit]
 
-        return coerce_bullets(data.get("bullets"), limit) or notes[:limit]
+        bullets = coerce_bullets(data.get("bullets"), limit) or notes[:limit]
+        return [strip_unsupported_clause(bullet, notes) for bullet in bullets]
 
     def _summary(self, digest: str, target_role: Optional[str],
                  existing: Optional[str]) -> Optional[str]:

@@ -6,7 +6,7 @@ from resume_optimizer.llm import MockProvider, get_provider
 from resume_optimizer.llm.base import _extract_json, coerce_bullets
 from resume_optimizer.loader import load_resume
 from resume_optimizer.models import Contact, Experience, Resume
-from resume_optimizer.optimizer import ResumeOptimizer
+from resume_optimizer.optimizer import ResumeOptimizer, strip_unsupported_clause
 from resume_optimizer.render import available_themes, render_html
 
 SAMPLE = "examples/sample_input.yaml"
@@ -99,3 +99,34 @@ def test_themes_are_discovered():
 def test_unknown_provider_raises():
     with pytest.raises(ValueError):
         get_provider("gpt-nonsense")
+
+def test_strips_unsupported_benefit_clause():
+    result = strip_unsupported_clause(
+        "Mentored two junior developers, enhancing team skills and knowledge.",
+        ["mentored 2 junior devs"],
+    )
+    assert result == "Mentored two junior developers."
+
+
+def test_keeps_clause_the_notes_support():
+    bullet = "Established CI with GitHub Actions, ensuring tests run on every PR."
+    notes = ["set up CI with github actions, tests now run on every PR"]
+    assert strip_unsupported_clause(bullet, notes) == bullet
+
+
+def test_leaves_bullets_without_clauses_untouched():
+    bullet = "Reduced p95 latency from 800ms to 210ms with Redis caching."
+    assert strip_unsupported_clause(bullet, ["cut p95 latency 800ms to 210ms"]) == bullet
+
+
+def test_optimizer_strips_padding_from_model_output():
+    class PaddingProvider(MockProvider):
+        def complete(self, system, user):
+            return json.dumps({"bullets": ["Built a parser, improving developer velocity."]})
+
+    resume = Resume(
+        contact=Contact(name="Test"),
+        experience=[Experience(company="Acme", role="Dev", notes=["built a parser"])],
+    )
+    result = ResumeOptimizer(PaddingProvider()).optimize(resume)
+    assert result.experience[0].bullets == ["Built a parser."]
