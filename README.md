@@ -152,5 +152,27 @@ it. `python -m resume_optimizer.cli themes` lists what is available.
 pytest
 ```
 
+## Limitations
+
+Things this does not do, and one thing it does badly:
+
+- **Prompt rules are not guarantees.** The system prompt forbids inventing metrics
+  and forbids appending outcome clauses the notes don't support. It mostly holds,
+  but it's an instruction to a model, not a constraint on it. I ran the same input
+  twice and got a clean "Fixed bugs in the billing module" on one pass and
+  "enhancing team skills and knowledge" on the next. Read the output before you
+  send it anywhere.
+
+- **No ATS keyword scoring.** Passing a `job_description` biases the rewrite toward
+  the posting's language, but nothing measures term coverage or reports what's missing.
+
+- **No page-overflow handling.** Both themes fit a typical one-page resume, but a
+  dense one spills to a second page and the tool neither detects it nor trims
+  bullet counts to compensate. `--max-bullets` is manual.
+
+- **The mock provider is not a language model.** It strips leading verbs and
+  prefixes canned ones, so its output reads badly by design. It exists so the
+  pipeline, tests, and templates can run with no API key and no network.
+
 The suite runs against the mock provider, so it needs no network access or API
 key.
