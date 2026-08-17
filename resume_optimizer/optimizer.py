@@ -45,7 +45,7 @@ class ResumeOptimizer:
             project.bullets = self._bullets(
                 role=project.name,
                 company="Personal project",
-                notes=project.notes + ([", ".join(project.tech)] if project.tech else []),
+                notes=project.notes,
                 target_role=result.target_role,
                 job_description=result.job_description,
                 limit=3,
