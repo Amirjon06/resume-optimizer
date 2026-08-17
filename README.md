@@ -8,6 +8,7 @@ template into a PDF.
 Works with the OpenAI API, a local Ollama model, or fully offline with a
 built-in mock backend so the pipeline can be run and tested without an API key.
 
+![Sample output](docs/sample-output.png)
 ## Why
 
 Most resume tools either template your text without improving it, or generate
