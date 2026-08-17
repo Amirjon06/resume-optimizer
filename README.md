@@ -154,7 +154,3 @@ pytest
 
 The suite runs against the mock provider, so it needs no network access or API
 key.
-
-## License
-
-MIT
