@@ -1,0 +1,66 @@
+contact:
+  name: Jane Doe
+  title: Backend Engineer
+  email: jane.doe@example.com
+  location: Berlin, Germany
+  github: github.com/janedoe
+  linkedin: linkedin.com/in/janedoe
+
+target_role: Senior Backend Engineer
+
+# Optional. Paste a real posting here and bullets get tailored toward it.
+job_description: |
+  Looking for a backend engineer with strong Python and distributed systems
+  experience. You will own services end to end, from design through on-call.
+
+experience:
+  - company: Northwind Logistics
+    role: Backend Engineer
+    start: Mar 2023
+    end: Present
+    location: Remote
+    # Write these as messy notes. Don't polish them; that is the tool's job.
+    notes:
+      - worked on the order tracking API, moved it off the old monolith
+      - cut p95 latency from 800ms to 210ms by adding redis caching and fixing n+1 queries
+      - set up CI with github actions, tests now run on every PR
+      - mentored 2 junior devs
+      - handled on-call rotation, wrote runbooks for the top 5 incidents
+
+  - company: Bright Data Labs
+    role: Junior Developer
+    start: Jun 2021
+    end: Feb 2023
+    location: Tashkent
+    notes:
+      - built internal dashboard in django for the ops team, about 40 daily users
+      - wrote etl scripts pulling from 3 vendor APIs into postgres
+      - was responsible for fixing bugs in the billing module
+
+projects:
+  - name: Resume Optimizer
+    url: github.com/yourhandle/resume-optimizer
+    tech: [Python, Jinja2, WeasyPrint, OpenAI API]
+    notes:
+      - cli tool that turns rough career notes into formatted resume PDFs
+      - pluggable llm backend so it works with openai or a local ollama model
+
+education:
+  - school: Tashkent University of Information Technologies
+    degree: BSc, Computer Science
+    start: 2017
+    end: 2021
+    details:
+      - Graduated with honors
+
+# Leave `skills` out entirely and the model will infer and group them.
+skills:
+  - category: Languages
+    items: [Python, SQL, JavaScript]
+  - category: Frameworks
+    items: [Django, FastAPI, React]
+  - category: Infrastructure
+    items: [PostgreSQL, Redis, Docker, AWS, GitHub Actions]
+
+certifications:
+  - AWS Certified Developer – Associate (2024)
