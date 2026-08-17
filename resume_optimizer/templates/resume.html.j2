@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ r.contact.name }} — Resume</title>
+  <style>{{ theme_css }}</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <h1>{{ r.contact.name }}</h1>
+    {% if r.contact.title %}<p class="headline">{{ r.contact.title }}</p>{% endif %}
+    {% if r.contact.links() %}
+    <p class="contact">
+      {% for item in r.contact.links() %}<span>{{ item }}</span>{% if not loop.last %}<span class="sep">•</span>{% endif %}{% endfor %}
+    </p>
+    {% endif %}
+  </header>
+
+  {% if r.summary %}
+  <section>
+    <h2>Summary</h2>
+    <p class="summary">{{ r.summary }}</p>
+  </section>
+  {% endif %}
+
+  {% if r.experience %}
+  <section>
+    <h2>Experience</h2>
+    {% for job in r.experience %}
+    <article class="entry">
+      <div class="entry-head">
+        <span class="entry-title">{{ job.role }}</span>
+        <span class="entry-meta">{{ job.dates }}</span>
+      </div>
+      <div class="entry-sub">
+        <span>{{ job.company }}</span>
+        {% if job.location %}<span class="entry-meta">{{ job.location }}</span>{% endif %}
+      </div>
+      {% if job.bullets %}
+      <ul>{% for bullet in job.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if r.projects %}
+  <section>
+    <h2>Projects</h2>
+    {% for project in r.projects %}
+    <article class="entry">
+      <div class="entry-head">
+        <span class="entry-title">{{ project.name }}</span>
+        {% if project.url %}<span class="entry-meta">{{ project.url }}</span>{% endif %}
+      </div>
+      {% if project.tech %}<div class="entry-sub"><span class="tech">{{ project.tech | join(' · ') }}</span></div>{% endif %}
+      {% if project.bullets %}
+      <ul>{% for bullet in project.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if r.skills %}
+  <section>
+    <h2>Skills</h2>
+    <table class="skills">
+      {% for group in r.skills %}
+      <tr><th>{{ group.category }}</th><td>{{ group.items | join(', ') }}</td></tr>
+      {% endfor %}
+    </table>
+  </section>
+  {% endif %}
+
+  {% if r.education %}
+  <section>
+    <h2>Education</h2>
+    {% for school in r.education %}
+    <article class="entry">
+      <div class="entry-head">
+        <span class="entry-title">{{ school.school }}</span>
+        <span class="entry-meta">{{ school.dates }}</span>
+      </div>
+      {% if school.degree %}<div class="entry-sub"><span>{{ school.degree }}</span></div>{% endif %}
+      {% if school.details %}
+      <ul>{% for detail in school.details %}<li>{{ detail }}</li>{% endfor %}</ul>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if r.certifications %}
+  <section>
+    <h2>Certifications</h2>
+    <ul>{% for cert in r.certifications %}<li>{{ cert }}</li>{% endfor %}</ul>
+  </section>
+  {% endif %}
+
+</body>
+</html>

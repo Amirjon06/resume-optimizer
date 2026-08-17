@@ -1,0 +1,123 @@
+@page {
+  size: Letter;
+  margin: 14mm 16mm;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 9.6pt;
+  line-height: 1.42;
+  color: #1c1f23;
+  margin: 0;
+}
+
+.masthead {
+  border-bottom: 2.5pt solid #1c1f23;
+  padding-bottom: 7pt;
+  margin-bottom: 12pt;
+}
+
+.masthead h1 {
+  font-size: 21pt;
+  letter-spacing: -0.4pt;
+  font-weight: 700;
+  margin: 0;
+}
+
+.headline {
+  font-size: 10.5pt;
+  color: #2f6f8f;
+  font-weight: 600;
+  margin: 2pt 0 0;
+}
+
+.contact {
+  margin: 5pt 0 0;
+  font-size: 8.6pt;
+  color: #55606b;
+}
+
+.contact .sep {
+  color: #a8b2bc;
+  padding: 0 5pt;
+}
+
+section { margin-bottom: 11pt; }
+
+h2 {
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 1.1pt;
+  color: #2f6f8f;
+  border-bottom: 0.6pt solid #d4dbe2;
+  padding-bottom: 2.5pt;
+  margin: 0 0 7pt;
+}
+
+.summary { margin: 0; color: #33393f; }
+
+.entry {
+  margin-bottom: 8.5pt;
+  /* Keep a heading from stranding at the foot of a page. */
+  break-inside: avoid;
+}
+
+.entry:last-child { margin-bottom: 0; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entry-title { font-weight: 700; font-size: 10.2pt; }
+
+.entry-sub {
+  display: flex;
+  justify-content: space-between;
+  color: #55606b;
+  font-size: 9.2pt;
+  margin-top: 0.5pt;
+}
+
+.entry-meta {
+  font-size: 8.6pt;
+  color: #6b757f;
+  white-space: nowrap;
+  padding-left: 8pt;
+}
+
+.tech { font-style: italic; font-size: 8.8pt; }
+
+ul {
+  margin: 4pt 0 0;
+  padding-left: 12pt;
+}
+
+li {
+  margin-bottom: 2.2pt;
+  padding-left: 1.5pt;
+}
+
+li::marker { color: #2f6f8f; }
+
+table.skills {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.skills th {
+  text-align: left;
+  font-weight: 700;
+  width: 23%;
+  padding: 1.6pt 8pt 1.6pt 0;
+  vertical-align: top;
+  color: #33393f;
+}
+
+table.skills td {
+  padding: 1.6pt 0;
+  vertical-align: top;
+}

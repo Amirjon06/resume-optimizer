@@ -1,0 +1,107 @@
+@page {
+  size: Letter;
+  margin: 14mm 16mm;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 9.5pt;
+  line-height: 1.38;
+  color: #111;
+  margin: 0;
+}
+
+.masthead {
+  text-align: center;
+  border-bottom: 0.8pt solid #111;
+  padding-bottom: 6pt;
+  margin-bottom: 10pt;
+}
+
+.masthead h1 {
+  font-size: 18pt;
+  font-weight: normal;
+  letter-spacing: 2.5pt;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.headline {
+  font-size: 10.5pt;
+  font-style: italic;
+  margin: 3pt 0 0;
+}
+
+.contact {
+  margin: 5pt 0 0;
+  font-size: 8.8pt;
+}
+
+.contact .sep { padding: 0 5pt; color: #555; }
+
+section { margin-bottom: 9pt; }
+
+h2 {
+  font-size: 10pt;
+  font-variant: small-caps;
+  letter-spacing: 0.6pt;
+  border-bottom: 0.5pt solid #999;
+  padding-bottom: 2pt;
+  margin: 0 0 7pt;
+}
+
+.summary { margin: 0; text-align: justify; }
+
+.entry {
+  margin-bottom: 7pt;
+  break-inside: avoid;
+}
+
+.entry:last-child { margin-bottom: 0; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.entry-title { font-weight: bold; }
+
+.entry-sub {
+  display: flex;
+  justify-content: space-between;
+  font-style: italic;
+  font-size: 9.4pt;
+}
+
+.entry-meta {
+  font-size: 9pt;
+  white-space: nowrap;
+  padding-left: 8pt;
+}
+
+ul {
+  margin: 3.5pt 0 0;
+  padding-left: 14pt;
+}
+
+li { margin-bottom: 2pt; }
+
+table.skills {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table.skills th {
+  text-align: left;
+  width: 22%;
+  padding: 1.5pt 8pt 1.5pt 0;
+  vertical-align: top;
+}
+
+table.skills td {
+  padding: 1.5pt 0;
+  vertical-align: top;
+}
