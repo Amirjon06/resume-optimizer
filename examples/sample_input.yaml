@@ -39,7 +39,7 @@ experience:
 
 projects:
   - name: Resume Optimizer
-    url: github.com/yourhandle/resume-optimizer
+    url: github.com/janedoe/resume-optimizer
     tech: [Python, Jinja2, WeasyPrint, OpenAI API]
     notes:
       - cli tool that turns rough career notes into formatted resume PDFs
