@@ -152,16 +152,17 @@ it. `python -m resume_optimizer.cli themes` lists what is available.
 pytest
 ```
 
+The suite runs against the mock provider, so it needs no network access or API key.
+
 ## Limitations
 
-Things this does not do, and one thing it does badly:
+Known rough edges:
 
-- **Prompt rules are not guarantees.** The system prompt forbids inventing metrics
-  and forbids appending outcome clauses the notes don't support. It mostly holds,
-  but it's an instruction to a model, not a constraint on it. I ran the same input
-  twice and got a clean "Fixed bugs in the billing module" on one pass and
-  "enhancing team skills and knowledge" on the next. Read the output before you
-  send it anywhere.
+- **The model still pads; the padding gets stripped.** The prompt tells it not to
+  invent outcome clauses and it does anyway, roughly half the time. `optimizer.py`
+  removes them afterward by checking each clause's words against the source notes.
+  That check is a heuristic, so unusual phrasing can slip through in either
+  direction — a real clause dropped, or an invented one kept.
 
 - **No ATS keyword scoring.** Passing a `job_description` biases the rewrite toward
   the posting's language, but nothing measures term coverage or reports what's missing.
@@ -173,6 +174,3 @@ Things this does not do, and one thing it does badly:
 - **The mock provider is not a language model.** It strips leading verbs and
   prefixes canned ones, so its output reads badly by design. It exists so the
   pipeline, tests, and templates can run with no API key and no network.
-
-The suite runs against the mock provider, so it needs no network access or API
-key.
